@@ -1,8 +1,8 @@
+using System;
 using System.Configuration;
 using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
-using Magnum.Extensions;
 using MassTransit;
 using MassTransit.Advanced;
 
@@ -19,11 +19,10 @@ namespace Saga
                                                {
                                                    sbc.UseRabbitMq();
                                                    sbc.UseRabbitMqRouting();
-                                                   sbc.ReceiveFrom(ConfigurationManager.AppSettings["serviceBus"]);//testUser:topSecret@localhost:5672
+                                                   sbc.SetReceiveTimeout(TimeSpan.FromMinutes(2));
+                                                   sbc.ReceiveFrom(ConfigurationManager.AppSettings["serviceBus"]);
                                                    sbc.Subscribe(subs => subs.LoadFrom(container));
-                                                   
                                                    sbc.Validate();
-
                                                })).LifeStyle.Singleton);
         }
     }

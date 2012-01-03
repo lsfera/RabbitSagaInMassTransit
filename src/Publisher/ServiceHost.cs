@@ -18,7 +18,7 @@ namespace Publisher
         public ServiceHost(IServiceBus bus)
         {
             this.bus = bus;
-
+            bus.WriteIntrospectionToFile("diagnostics_pub.txt");
             timer =  new Timer(1000 * 5) { AutoReset = false, Enabled = true};
             timer.Elapsed += (sender, eventArgs) => ProcessCarts();
 

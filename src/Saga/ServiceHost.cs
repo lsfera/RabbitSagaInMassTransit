@@ -13,6 +13,7 @@ namespace Saga
         public ServiceHost(IServiceBus bus)
         {
             this.bus = bus;
+            bus.WriteIntrospectionToFile("diagnostics_saga.txt");
         }
 
         public void Start()
@@ -22,6 +23,7 @@ namespace Saga
         
         public void Stop()
         {
+            
             bus.Dispose();
             Console.WriteLine("Stopping....");
         }

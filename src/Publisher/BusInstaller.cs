@@ -18,7 +18,6 @@ namespace Publisher
                                                    sbc.UseRabbitMq();
                                                    sbc.UseRabbitMqRouting();
                                                    sbc.ReceiveFrom(ConfigurationManager.AppSettings["serviceBus"]);
-                                                   sbc.SetConcurrentConsumerLimit(1);
                                                    sbc.Subscribe(subs => 
                                                                  subs.LoadFrom(container));
                                                    sbc.Validate();
